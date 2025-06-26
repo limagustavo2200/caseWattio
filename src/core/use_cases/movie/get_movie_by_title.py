@@ -1,9 +1,9 @@
 from models.movie import Movie
-from ports.movie_repository import MovieRepository
+from ports.movie_interface import MovieInterface
 
 
 class GetMovieByTitle:
-    def __init__(self, repo: MovieRepository):
+    def __init__(self, repo: MovieInterface):
         self.repo = repo
 
     def execute(self, title: str) -> Movie | None:

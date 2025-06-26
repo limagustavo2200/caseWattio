@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from models.movie import Movie
 from typing import List, Optional
 
-class MovieRepository(ABC):
+class MovieInterface(ABC):
     @abstractmethod
     def add(self, movie: Movie) -> None:
         pass
@@ -12,7 +12,7 @@ class MovieRepository(ABC):
         pass
                 
     @abstractmethod
-    def get_by_id(self, movie_id: int) -> Optional[Movie]:
+    def get_by_id(self, movie_id: str) -> Optional[Movie]:
         pass
 
     @abstractmethod
@@ -21,4 +21,8 @@ class MovieRepository(ABC):
     
     @abstractmethod
     def delete_by_title(self, title: str) -> None:
+        pass
+
+    @abstractmethod
+    def update(self, movie: Movie) -> Optional[Movie]:
         pass
