@@ -38,13 +38,14 @@ class SQLAlchemyMovieRepository(MovieInterface):
             return Movie(id=m.id, title=m.title, year=m.year, director=m.director)
         return None
 
-    def delete_by_title(self, title: str) -> None:
+    def delete_by_title(self, title: str) -> int:
         db = SessionLocal()
-        db.query(MovieORM).filter(MovieORM.title == title).delete()
+        deleted_count = db.query(MovieORM).filter(MovieORM.title == title).delete()
         db.commit()
         db.close()
+        return deleted_count
 
-    def update_by_id(self, movie: Movie):
+    def update(self, movie: Movie) -> Optional[Movie]:
         db = SessionLocal()
         db_movie = db.query(MovieORM).filter(MovieORM.id == movie.id).first()
         if db_movie:
@@ -52,4 +53,8 @@ class SQLAlchemyMovieRepository(MovieInterface):
             db_movie.year = movie.year
             db_movie.director = movie.director
             db.commit()
+            updated = Movie(id=db_movie.id, title=db_movie.title, year=db_movie.year, director=db_movie.director)
+            db.close()
+            return updated
         db.close()
+        return None

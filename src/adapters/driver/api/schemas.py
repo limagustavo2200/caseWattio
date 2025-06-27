@@ -10,7 +10,7 @@ class MovieRead(BaseModel):
     id: str
     title: str
     year: int
-    director: str
+    duration: str
 
     class Config:
         orm_mode = True

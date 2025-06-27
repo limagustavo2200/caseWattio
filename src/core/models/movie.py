@@ -6,5 +6,5 @@ class Movie:
     id: int
     title: str
     year: int
-    director: str
+    duration: str
     
