@@ -1,5 +1,5 @@
-from models.movie import Movie
-from ports.movie_interface import MovieInterface
+from core.models.movie import Movie
+from core.ports.movie_interface import MovieInterface
 
 class AddMovie:
     def __init__(self, repo: MovieInterface):

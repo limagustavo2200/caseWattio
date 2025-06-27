@@ -9,4 +9,4 @@ class MovieORM(Base):
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), index=True)
     title = Column(String, nullable=False)
     year = Column(Integer, nullable=False)
-    director = Column(String, nullable=False)  
+    duration = Column(String, nullable=False)  

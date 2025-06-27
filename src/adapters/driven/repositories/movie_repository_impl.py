@@ -1,3 +1,4 @@
+from typing import Optional
 from core.ports.movie_interface import MovieInterface
 from core.models.movie import Movie
 from adapters.driven.database.connection import SessionLocal
@@ -10,7 +11,7 @@ class SQLAlchemyMovieRepository(MovieInterface):
             id=movie.id,
             title=movie.title,
             year=movie.year,
-            director=movie.director
+            duration=movie.duration
         )
         db.add(db_movie)
         db.commit()
@@ -20,14 +21,14 @@ class SQLAlchemyMovieRepository(MovieInterface):
         db = SessionLocal()
         movies = db.query(MovieORM).all()
         db.close()
-        return [Movie(id=m.id, title=m.title, year=m.year, director=m.director) for m in movies]
+        return [Movie(id=m.id, title=m.title, year=m.year, duration=m.duration) for m in movies]
 
     def get_by_id(self, movie_id: str):
         db = SessionLocal()
         m = db.query(MovieORM).filter(MovieORM.id == movie_id).first()
         db.close()
         if m:
-            return Movie(id=m.id, title=m.title, year=m.year, director=m.director)
+            return Movie(id=m.id, title=m.title, year=m.year, duration=m.duration)
         return None
 
     def get_by_title(self, title: str):
@@ -35,7 +36,7 @@ class SQLAlchemyMovieRepository(MovieInterface):
         m = db.query(MovieORM).filter(MovieORM.title == title).first()
         db.close()
         if m:
-            return Movie(id=m.id, title=m.title, year=m.year, director=m.director)
+            return Movie(id=m.id, title=m.title, year=m.year, duration=m.duration)
         return None
 
     def delete_by_title(self, title: str) -> int:
@@ -51,9 +52,9 @@ class SQLAlchemyMovieRepository(MovieInterface):
         if db_movie:
             db_movie.title = movie.title
             db_movie.year = movie.year
-            db_movie.director = movie.director
+            db_movie.duration = movie.duration
             db.commit()
-            updated = Movie(id=db_movie.id, title=db_movie.title, year=db_movie.year, director=db_movie.director)
+            updated = Movie(id=db_movie.id, title=db_movie.title, year=db_movie.year, duration=db_movie.duration)
             db.close()
             return updated
         db.close()

@@ -4,7 +4,7 @@ from typing import Optional
 class MovieCreate(BaseModel):
     title: str
     year: int
-    director: str
+    duration: str
 
 class MovieRead(BaseModel):
     id: str

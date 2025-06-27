@@ -35,7 +35,7 @@ def add_filme(filme: MovieCreate):
         id=str(uuid.uuid4()),
         title=filme.title,
         year=filme.year,
-        director=filme.director
+        duration=filme.duration
     )
     add_movie_use_case.execute(movie)
     return movie
@@ -49,7 +49,7 @@ def get_filme(id: str):
 
 @router.put("/filmes/{id}", response_model=MovieRead, status_code=HTTPStatus.OK)
 def update_filme(id: str, filme: MovieCreate):
-    movie = Movie(id=id, title=filme.title, year=filme.year, director=filme.director)
+    movie = Movie(id=id, title=filme.title, year=filme.year, duration=filme.duration)
     updated = update_movie_use_case.execute(movie)
     if not updated:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Filme não encontrado para atualizar")

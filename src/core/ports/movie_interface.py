@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from models.movie import Movie
+from core.models.movie import Movie
 from typing import List, Optional
 
 class MovieInterface(ABC):
